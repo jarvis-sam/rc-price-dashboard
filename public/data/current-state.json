@@ -1,0 +1,198 @@
+{
+  "lastCommunication": "2026-01-30T16:30:00Z",
+  "lastPriceCheck": "2026-01-29T15:10:00Z",
+  "lastResearchUpdate": "2026-01-30T16:30:00Z",
+  "lastMonitorRun": "2026-01-29T15:10:00Z",
+  "currentFlashSale": {
+    "active": true,
+    "name": "Surf's Up Savings",
+    "dates": "January 29 - February 3, 2026",
+    "maxDiscount": "40%",
+    "note": "EXCLUSIVE CABIN OFFER applies to Interior, Oceanview, and Suite staterooms",
+    "endsAt": "2026-02-03"
+  },
+  "pricesObserved": {
+    "deluxeBeverage": {
+      "price": 77.99,
+      "originalPrice": 120.00,
+      "discount": "35%",
+      "perGuestPerDay": true,
+      "date": "2026-01-29",
+      "note": "EXCLUSIVE CABIN OFFER",
+      "recordLow": 46.99,
+      "recordLowDate": "2025-11-20",
+      "target": 50,
+      "recommendation": "ESPERAR - precio está 68% sobre record low"
+    },
+    "refreshmentPackage": {
+      "price": 26.99,
+      "originalPrice": 42.00,
+      "discount": "35%",
+      "perGuestPerDay": true,
+      "date": "2026-01-29",
+      "target": 22,
+      "recommendation": "ESPERAR"
+    },
+    "classicSoda": {
+      "price": 11.99,
+      "originalPrice": 18.00,
+      "discount": "30%",
+      "perGuestPerDay": true,
+      "date": "2026-01-29"
+    },
+    "unlimitedDining": {
+      "price": 39.99,
+      "originalPrice": 62.00,
+      "discount": "35%",
+      "perGuestPerDay": true,
+      "date": "2026-01-29",
+      "target": 35,
+      "recordLow": 30,
+      "recommendation": "ESPERAR - target $35/día"
+    },
+    "thrillWaterpark": {
+      "price": 73.99,
+      "originalPrice": 124.00,
+      "discount": "40%",
+      "perGuest": true,
+      "day": "Day 7 - CocoCay",
+      "date": "2026-01-29",
+      "recordLow": 50,
+      "recommendation": "CONSIDERAR - buen descuento si van con niños"
+    },
+    "hideawayBeach": {
+      "price": 61.99,
+      "originalPrice": 104.00,
+      "discount": "40%",
+      "perGuest": true,
+      "adultsOnly": true,
+      "day": "Day 7 - CocoCay",
+      "date": "2026-01-29",
+      "recommendation": "COMPRAR - precio histórico bajo, adults only, incluye comida"
+    },
+    "cocoBeachClub": {
+      "price": 128.99,
+      "originalPrice": 199.00,
+      "discount": "35%",
+      "perGuest": true,
+      "day": "Day 7 - CocoCay",
+      "date": "2026-01-29",
+      "recommendation": "SKIP - muy caro para lo que ofrece"
+    },
+    "chopsGrille": {
+      "price": 51.99,
+      "originalPrice": 70.00,
+      "discount": "25%",
+      "perGuest": true,
+      "date": "2026-01-29"
+    },
+    "giovannis": {
+      "price": 37.99,
+      "originalPrice": 55.00,
+      "discount": "30%",
+      "perGuest": true,
+      "date": "2026-01-29"
+    }
+  },
+  "research": {
+    "royalUp": {
+      "summary": "Sistema de bid para upgrades de cabina",
+      "howItWorks": [
+        "RC envía invitación por email (no garantizado)",
+        "Seleccionas categorías y pones bid por persona",
+        "RC decide antes del crucero",
+        "Si ganas te cobran, si no mantienes tu cabina"
+      ],
+      "tips": [
+        "Bid en múltiples categorías",
+        "Bidear temprano",
+        "Solo bid en cabinas que realmente quieras",
+        "Bids 40-60% bajo retail tienen buenas chances"
+      ],
+      "worthIt": true
+    },
+    "repricing": {
+      "status": "RESTRINGIDO",
+      "currentPolicy": "Flash sales not eligible for reprice - new bookings only",
+      "workarounds": [
+        "Antes de final payment: cancelar y re-reservar",
+        "Add-ons del Cruise Planner: cancelar y recomprar",
+        "Usar travel agent que pueda negociar"
+      ]
+    },
+    "crownAndAnchor": {
+      "membership": "Automática después del primer crucero",
+      "levels": ["Gold (3pts)", "Platinum (30pts)", "Emerald (55pts)", "Diamond (80pts)", "Diamond Plus (175pts)", "Pinnacle (700pts)"],
+      "pointsPerNight": 1,
+      "suiteBonus": 2
+    },
+    "creditCard": {
+      "name": "Royal Caribbean Visa Signature",
+      "issuer": "Bank of America",
+      "annualFee": 0,
+      "earningRate": "2pts/$1 RC, 1pt/$1 other",
+      "signupBonus": "30,000 points ($300 OBC)",
+      "worthIt": "Sí, si vas a pagar el crucero con ella"
+    },
+    "cocoCayInsights": {
+      "hideawayBeach": {
+        "verdict": "VALE LA PENA",
+        "includes": ["Pool climatizada", "Comida incluida", "Menos gente", "Adults only"],
+        "priceHistory": "Usualmente $80-100+, $61.99 es histórico bajo"
+      },
+      "thrillWaterpark": {
+        "verdict": "VALE si hay niños/teens",
+        "unique": "Toboganes más grandes que en el barco"
+      },
+      "freeBeaches": {
+        "verdict": "EXCELENTES",
+        "note": "No necesitas pagar nada para pasar buen día"
+      }
+    }
+  },
+  "upcomingSales": [
+    {"name": "Valentine's Day Sale", "date": "2026-02-14", "action": "Verificar precios bebidas"},
+    {"name": "Presidents Day Sale", "date": "2026-02-17", "action": "Verificar precios bebidas"},
+    {"name": "Memorial Day Sale", "date": "2026-05-26", "action": "Última oportunidad pre-crucero"}
+  ],
+  "keyDates": {
+    "currentSaleEnds": "2026-02-03",
+    "finalPayment": "2026-05-24",
+    "cruiseStart": "2026-08-22",
+    "cruiseEnd": "2026-08-29"
+  },
+  "actionItems": {
+    "urgent": [
+      "COMPRAR Hideaway Beach antes de Feb 3 ($61.99 - 40% off)",
+      "CONSIDERAR Thrill Waterpark si van niños ($73.99 - 40% off)"
+    ],
+    "wait": [
+      "Deluxe Beverage - esperar Valentine's/Presidents Day",
+      "Unlimited Dining - target $35/día",
+      "WiFi - probablemente skip"
+    ],
+    "verify": [
+      "Revisar emails por invitación Royal Up",
+      "Evaluar Royal Caribbean Visa para pago final",
+      "Re-verificar precios Feb 14-17"
+    ]
+  },
+  "analysis": {
+    "deluxeBeverage": "35% off es decente pero no excepcional. Black Friday tuvo 55% off ($46.99). Precio actual $77.99 está 68% sobre record low. ESPERAR.",
+    "cocoCay": "40% off en Hideaway Beach y Waterpark es muy buen precio. Hideaway a $61.99 es histórico bajo.",
+    "overall": "Flash sale actual tiene buenos precios para CocoCay pero bebidas/dining aún no están en targets. Comprar CocoCay ahora, esperar el resto."
+  },
+  "sourcesChecked": {
+    "cruisePlanner": "2026-01-29",
+    "exaResearch": "2026-01-30",
+    "royalCaribbeanblog": "2026-01-30",
+    "cruiseCritic": "2026-01-30",
+    "nerdwallet": "2026-01-30"
+  },
+  "pendingActions": [
+    "Monitorear Valentine's Day sale (Feb 14)",
+    "Monitorear Presidents Day sale (Feb 17)",
+    "Verificar emails de RC en Gmail",
+    "Verificar si llegó invitación Royal Up"
+  ]
+}

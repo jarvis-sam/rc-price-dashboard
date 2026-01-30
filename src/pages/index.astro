@@ -1,0 +1,399 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Countdown from '../components/Countdown';
+import FlashSaleBanner from '../components/FlashSaleBanner';
+import PriceTable from '../components/PriceTable';
+import PriceChart from '../components/PriceChart';
+import RecommendationCard from '../components/RecommendationCard';
+import SaleTimeline from '../components/SaleTimeline';
+import CocoCaySection from '../components/CocoCaySection';
+
+// Load data
+import currentState from '../../public/data/current-state.json';
+import priceHistory from '../../public/data/price-history.json';
+
+// Transform prices for table
+const priceItems = [
+  {
+    name: 'Deluxe Beverage Package',
+    price: currentState.pricesObserved.deluxeBeverage.price,
+    originalPrice: currentState.pricesObserved.deluxeBeverage.originalPrice,
+    discount: currentState.pricesObserved.deluxeBeverage.discount,
+    target: currentState.pricesObserved.deluxeBeverage.target,
+    recordLow: currentState.pricesObserved.deluxeBeverage.recordLow,
+    recordDate: currentState.pricesObserved.deluxeBeverage.recordLowDate,
+    recommendation: 'ESPERAR' as const,
+    note: currentState.pricesObserved.deluxeBeverage.note,
+    perDay: true,
+  },
+  {
+    name: 'Refreshment Package',
+    price: currentState.pricesObserved.refreshmentPackage.price,
+    originalPrice: currentState.pricesObserved.refreshmentPackage.originalPrice,
+    discount: currentState.pricesObserved.refreshmentPackage.discount,
+    target: currentState.pricesObserved.refreshmentPackage.target || 25,
+    recordLow: 21.99,
+    recordDate: 'Nov 2025',
+    recommendation: 'ESPERAR' as const,
+    perDay: true,
+  },
+  {
+    name: 'Unlimited Dining',
+    price: currentState.pricesObserved.unlimitedDining.price,
+    originalPrice: currentState.pricesObserved.unlimitedDining.originalPrice,
+    discount: currentState.pricesObserved.unlimitedDining.discount,
+    target: currentState.pricesObserved.unlimitedDining.target,
+    recordLow: currentState.pricesObserved.unlimitedDining.recordLow,
+    recordDate: 'Nov 2025',
+    recommendation: 'ESPERAR' as const,
+    perDay: true,
+  },
+  {
+    name: 'Thrill Waterpark (CocoCay)',
+    price: currentState.pricesObserved.thrillWaterpark.price,
+    originalPrice: currentState.pricesObserved.thrillWaterpark.originalPrice,
+    discount: currentState.pricesObserved.thrillWaterpark.discount,
+    target: 60,
+    recordLow: currentState.pricesObserved.thrillWaterpark.recordLow,
+    recordDate: 'Nov 2025',
+    recommendation: 'CONSIDERAR' as const,
+    perDay: false,
+  },
+  {
+    name: 'Hideaway Beach (CocoCay)',
+    price: currentState.pricesObserved.hideawayBeach.price,
+    originalPrice: currentState.pricesObserved.hideawayBeach.originalPrice,
+    discount: currentState.pricesObserved.hideawayBeach.discount,
+    target: 55,
+    recordLow: 49.99,
+    recordDate: 'Nov 2025',
+    recommendation: 'COMPRAR' as const,
+    note: 'Adults only • Historic low price!',
+    perDay: false,
+  },
+  {
+    name: 'Coco Beach Club (CocoCay)',
+    price: currentState.pricesObserved.cocoBeachClub.price,
+    originalPrice: currentState.pricesObserved.cocoBeachClub.originalPrice,
+    discount: currentState.pricesObserved.cocoBeachClub.discount,
+    target: 100,
+    recordLow: 99.99,
+    recordDate: 'Nov 2025',
+    recommendation: 'SKIP' as const,
+    perDay: false,
+  },
+];
+
+// CocoCay items for dedicated section
+const cocoCayItems = [
+  {
+    name: 'Hideaway Beach',
+    price: currentState.pricesObserved.hideawayBeach.price,
+    originalPrice: currentState.pricesObserved.hideawayBeach.originalPrice,
+    discount: currentState.pricesObserved.hideawayBeach.discount,
+    description: 'Exclusive adults-only beach with premium amenities and a stunning infinity pool.',
+    verdict: currentState.research.cocoCayInsights.hideawayBeach.verdict,
+    includes: currentState.research.cocoCayInsights.hideawayBeach.includes,
+    isAdultsOnly: true,
+    recommendation: 'COMPRAR' as const,
+  },
+  {
+    name: 'Thrill Waterpark',
+    price: currentState.pricesObserved.thrillWaterpark.price,
+    originalPrice: currentState.pricesObserved.thrillWaterpark.originalPrice,
+    discount: currentState.pricesObserved.thrillWaterpark.discount,
+    description: 'Caribbean\'s largest waterpark with 13 slides including Daredevil\'s Peak.',
+    verdict: currentState.research.cocoCayInsights.thrillWaterpark.verdict,
+    includes: ['All slides', 'Wave pool', 'Adventure pool', 'Kids aqua park'],
+    isAdultsOnly: false,
+    recommendation: 'CONSIDERAR' as const,
+  },
+  {
+    name: 'Coco Beach Club',
+    price: currentState.pricesObserved.cocoBeachClub.price,
+    originalPrice: currentState.pricesObserved.cocoBeachClub.originalPrice,
+    discount: currentState.pricesObserved.cocoBeachClub.discount,
+    description: 'Ultra-premium beach club with overwater cabanas and gourmet dining.',
+    verdict: 'Too expensive for what you get. Free beaches are excellent.',
+    includes: ['Private beach', 'Infinity pool', 'Lunch included', 'Premium loungers'],
+    isAdultsOnly: false,
+    recommendation: 'SKIP' as const,
+  },
+];
+
+// Transform upcoming sales
+const upcomingSales = currentState.upcomingSales.map(sale => ({
+  name: sale.name,
+  date: sale.date,
+  action: sale.action,
+}));
+
+// Add key dates to sales
+upcomingSales.push({
+  name: '⚠️ Final Payment Due',
+  date: currentState.keyDates.finalPayment,
+  action: 'Must have all add-ons purchased by now!',
+});
+
+// Analysis text
+const analysisPoints = Object.entries(currentState.analysis).map(([key, value]) => ({
+  title: key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1'),
+  text: value,
+}));
+---
+
+<Layout title="RC Price Dashboard | Icon of the Seas Aug 2026">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative py-12 md:py-20 px-4">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 mb-6">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span class="text-cyan-400 text-sm font-medium">Live Price Tracking</span>
+          </div>
+          
+          <h1 class="text-4xl md:text-6xl font-bold mb-4">
+            <span class="gradient-text">Icon of the Seas</span>
+          </h1>
+          <p class="text-xl text-gray-400 mb-2">August 22-29, 2026 • Eastern Caribbean</p>
+          <p class="text-gray-500">7-Night Cruise from Miami</p>
+        </div>
+        
+        <!-- Countdown -->
+        <div class="text-center mb-12">
+          <p class="text-sm text-gray-500 uppercase tracking-wider mb-4">Cruise Departure In</p>
+          <Countdown client:load targetDate={currentState.keyDates.cruiseStart} />
+        </div>
+        
+        <!-- Flash Sale Banner (if active) -->
+        {currentState.currentFlashSale.active && (
+          <div class="mb-12 fade-in">
+            <FlashSaleBanner 
+              client:load
+              name={currentState.currentFlashSale.name}
+              dates={currentState.currentFlashSale.dates}
+              maxDiscount={currentState.currentFlashSale.maxDiscount}
+              endsAt={currentState.currentFlashSale.endsAt}
+              note={currentState.currentFlashSale.note}
+            />
+          </div>
+        )}
+      </div>
+    </section>
+    
+    <!-- Recommendations Section -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+          <span class="text-3xl">🎯</span>
+          Action Items
+        </h2>
+        
+        <div class="grid md:grid-cols-3 gap-6 stagger-children">
+          <RecommendationCard 
+            client:load
+            type="urgent"
+            title="Buy Now! 🔥"
+            items={currentState.actionItems.urgent}
+            icon="🛒"
+          />
+          <RecommendationCard 
+            client:load
+            type="wait"
+            title="Wait For Better Deals"
+            items={currentState.actionItems.wait}
+            icon="⏳"
+          />
+          <RecommendationCard 
+            client:load
+            type="verify"
+            title="To Verify"
+            items={currentState.actionItems.verify}
+            icon="📋"
+          />
+        </div>
+      </div>
+    </section>
+    
+    <!-- Price Table Section -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+          <span class="text-3xl">💰</span>
+          Current Prices
+        </h2>
+        
+        <PriceTable client:load prices={priceItems} />
+        
+        <div class="mt-4 flex flex-wrap gap-4 text-sm">
+          <span class="flex items-center gap-2 text-gray-500">
+            <span class="badge badge-buy">🔥 COMPRAR</span>
+            At or below target
+          </span>
+          <span class="flex items-center gap-2 text-gray-500">
+            <span class="badge badge-wait">⏳ ESPERAR</span>
+            Better prices expected
+          </span>
+          <span class="flex items-center gap-2 text-gray-500">
+            <span class="badge badge-skip">❌ SKIP</span>
+            Not recommended
+          </span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Price History Chart -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+          <span class="text-3xl">📈</span>
+          Price Evolution
+        </h2>
+        
+        <PriceChart 
+          client:load
+          history={priceHistory.history}
+          targets={priceHistory.targets}
+        />
+      </div>
+    </section>
+    
+    <!-- CocoCay Section -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <CocoCaySection client:load items={cocoCayItems} />
+      </div>
+    </section>
+    
+    <!-- Analysis Section -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+          <span class="text-3xl">🧠</span>
+          Today's Analysis
+        </h2>
+        
+        <div class="glass rounded-2xl p-6">
+          <div class="space-y-6">
+            {analysisPoints.map((point) => (
+              <div class="border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                <h4 class="font-semibold text-cyan-400 mb-2 capitalize">{point.title}</h4>
+                <p class="text-gray-300 leading-relaxed">{point.text}</p>
+              </div>
+            ))}
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-white/10">
+            <p class="text-sm text-gray-500">
+              Last updated: {new Date(currentState.lastPriceCheck).toLocaleString('en-US', {
+                dateStyle: 'medium',
+                timeStyle: 'short'
+              })}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Timeline & Research Grid -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-8">
+          <!-- Sales Timeline -->
+          <SaleTimeline 
+            client:load
+            sales={upcomingSales}
+            currentSaleEnds={currentState.keyDates.currentSaleEnds}
+          />
+          
+          <!-- Research Tips -->
+          <div class="glass rounded-2xl p-6">
+            <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              💡 Pro Tips & Research
+            </h3>
+            
+            <div class="space-y-6">
+              <!-- Royal Up -->
+              <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
+                <h4 class="font-semibold text-purple-400 mb-2">👑 Royal Up (Cabin Upgrades)</h4>
+                <p class="text-sm text-gray-400 mb-3">{currentState.research.royalUp.summary}</p>
+                <ul class="space-y-1">
+                  {currentState.research.royalUp.tips.slice(0, 3).map(tip => (
+                    <li class="text-sm text-gray-300 flex items-start gap-2">
+                      <span class="text-purple-400">→</span>
+                      {tip}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <!-- Repricing -->
+              <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+                <h4 class="font-semibold text-amber-400 mb-2">🔄 Repricing Policy</h4>
+                <p class="text-sm text-gray-400 mb-3">
+                  <span class="font-medium text-amber-400">{currentState.research.repricing.status}:</span> {currentState.research.repricing.currentPolicy}
+                </p>
+                <p class="text-xs text-gray-500">Workaround: Cancel and rebook add-ons at new price</p>
+              </div>
+              
+              <!-- Credit Card -->
+              <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                <h4 class="font-semibold text-cyan-400 mb-2">💳 {currentState.research.creditCard.name}</h4>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <span class="text-gray-500">Annual Fee:</span>
+                    <span class="text-white ml-1">${currentState.research.creditCard.annualFee}</span>
+                  </div>
+                  <div>
+                    <span class="text-gray-500">Signup Bonus:</span>
+                    <span class="text-emerald-400 ml-1">{currentState.research.creditCard.signupBonus}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Key Dates -->
+    <section class="py-12 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="glass rounded-2xl p-6">
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            📅 Key Dates
+          </h3>
+          
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-center">
+              <p class="text-sm text-gray-400 mb-1">Current Sale Ends</p>
+              <p class="text-lg font-bold text-cyan-400">
+                {new Date(currentState.keyDates.currentSaleEnds).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-center">
+              <p class="text-sm text-gray-400 mb-1">Final Payment</p>
+              <p class="text-lg font-bold text-amber-400">
+                {new Date(currentState.keyDates.finalPayment).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+              <p class="text-sm text-gray-400 mb-1">Cruise Starts</p>
+              <p class="text-lg font-bold text-emerald-400">
+                {new Date(currentState.keyDates.cruiseStart).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-center">
+              <p class="text-sm text-gray-400 mb-1">Cruise Ends</p>
+              <p class="text-lg font-bold text-purple-400">
+                {new Date(currentState.keyDates.cruiseEnd).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

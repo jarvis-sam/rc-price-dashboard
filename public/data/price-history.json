@@ -1,0 +1,90 @@
+{
+  "history": [
+    {
+      "date": "2026-01-29",
+      "deluxeBeverage": 77.99,
+      "refreshment": 26.99,
+      "unlimitedDining": 39.99,
+      "thrillWaterpark": 73.99,
+      "hideawayBeach": 61.99,
+      "cocoBeachClub": 128.99,
+      "flashSale": "Surf's Up Savings"
+    },
+    {
+      "date": "2026-01-28",
+      "deluxeBeverage": 89.99,
+      "refreshment": 31.99,
+      "unlimitedDining": 45.99,
+      "thrillWaterpark": 89.99,
+      "hideawayBeach": 79.99,
+      "cocoBeachClub": 149.99,
+      "flashSale": null
+    },
+    {
+      "date": "2026-01-20",
+      "deluxeBeverage": 95.99,
+      "refreshment": 35.99,
+      "unlimitedDining": 52.99,
+      "thrillWaterpark": 99.99,
+      "hideawayBeach": 89.99,
+      "cocoBeachClub": 169.99,
+      "flashSale": null
+    },
+    {
+      "date": "2026-01-15",
+      "deluxeBeverage": 89.99,
+      "refreshment": 29.99,
+      "unlimitedDining": 42.99,
+      "thrillWaterpark": 79.99,
+      "hideawayBeach": 69.99,
+      "cocoBeachClub": 139.99,
+      "flashSale": "New Year Sale"
+    },
+    {
+      "date": "2025-12-28",
+      "deluxeBeverage": 95.99,
+      "refreshment": 35.99,
+      "unlimitedDining": 52.99,
+      "thrillWaterpark": 99.99,
+      "hideawayBeach": 89.99,
+      "cocoBeachClub": 169.99,
+      "flashSale": null
+    },
+    {
+      "date": "2025-11-29",
+      "deluxeBeverage": 52.99,
+      "refreshment": 22.99,
+      "unlimitedDining": 32.99,
+      "thrillWaterpark": 59.99,
+      "hideawayBeach": 54.99,
+      "cocoBeachClub": 109.99,
+      "flashSale": "Black Friday"
+    },
+    {
+      "date": "2025-11-20",
+      "deluxeBeverage": 46.99,
+      "refreshment": 21.99,
+      "unlimitedDining": 30.99,
+      "thrillWaterpark": 54.99,
+      "hideawayBeach": 49.99,
+      "cocoBeachClub": 99.99,
+      "flashSale": "Early Black Friday"
+    }
+  ],
+  "targets": {
+    "deluxeBeverage": 50,
+    "refreshment": 25,
+    "unlimitedDining": 35,
+    "thrillWaterpark": 60,
+    "hideawayBeach": 55,
+    "cocoBeachClub": 100
+  },
+  "recordLows": {
+    "deluxeBeverage": { "price": 46.99, "date": "2025-11-20" },
+    "refreshment": { "price": 21.99, "date": "2025-11-20" },
+    "unlimitedDining": { "price": 30.99, "date": "2025-11-20" },
+    "thrillWaterpark": { "price": 54.99, "date": "2025-11-20" },
+    "hideawayBeach": { "price": 49.99, "date": "2025-11-20" },
+    "cocoBeachClub": { "price": 99.99, "date": "2025-11-20" }
+  }
+}
